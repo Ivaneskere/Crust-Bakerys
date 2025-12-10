@@ -1,7 +1,14 @@
 #root {
   margin: 0 auto;
 }
-
+body {
+  background-color: rgb(25, 22, 22);
+  color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .logo {
   will-change: filter;
   transition: filter 300ms;

@@ -1,8 +1,19 @@
-import React from "react";
-import { useState } from "react";
+import { useReducer } from "react";
 
 function MainProducts() {
-    const [category, SetCategory] = useState("all");
+    const initialState = { category: "all" };
+
+    function reducer(state, action) {
+        switch (action.type) {
+            case "setCategory":
+                return { ...state, category: action.payload };
+            default:
+                return state;
+        }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const { category } = state;
 
     const products = [
         { id: 1, title: "Cake 1", category: "cakes", image: "/Pictures/cake.png" },
@@ -22,19 +33,21 @@ function MainProducts() {
 
             <div>
                 
-                <button onClick={() => SetCategory("cakes")}>Cakes</button>
-                <button onClick={() => SetCategory("baking")}>Baking</button>
-                <button onClick={() => SetCategory("coffee")}>Coffee</button>
-                <button onClick={() => SetCategory("pizza")}>Pizza</button>
+                <button onClick={() => dispatch({ type: "setCategory", payload: "cakes" })}>Cakes</button>
+                <button onClick={() => dispatch({ type: "setCategory", payload: "baking" })}>Baking</button>
+                <button onClick={() => dispatch({ type: "setCategory", payload: "coffee" })}>Coffee</button>
+                <button onClick={() => dispatch({ type: "setCategory", payload: "pizza" })}>Pizza</button>
              </div>
 
             <div>
                 {filtererProducts.map(product => (
 
-                    <div key={product.id}>
-                        {product.title}
-                        {product.image}
-                        </div >
+                    <div key={product.id} className="product-item">
+                        <h3>{product.title}</h3>
+                        {product.image && (
+                            <img src={product.image} alt={product.title} />
+                        )}
+                    </div>
 
                 ))}
             </div>
@@ -43,4 +56,5 @@ function MainProducts() {
             )
 
 }
-            export default MainProducts;
+
+export default MainProducts;

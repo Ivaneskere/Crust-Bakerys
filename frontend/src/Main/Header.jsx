@@ -1,21 +1,15 @@
-
-import React from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
-
-
-
+import Logo from "../components/Logo";
 
 function Header() {
     return (
         <div className="container">
             <header id="header" className="header">
-                    <div className="logo">
-                        <img src="/Pictures/logo.png" alt="" />
-                    </div>
+                    <Logo colorClass="logo-light" />
 
                     <div className="menu">
-                        <Link to="/">Home</Link>
+                        {/* <Link to="/">Home</Link>  убираю бо при натиску на лого буде перекидати на home якщо не подобається переговорим в тг*/}
                         <Link to="/Products">Products</Link>
                         <Link to="/AboutUs">AboutUs</Link>
                     </div>

@@ -2,47 +2,68 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
+  // padding: 0 40px;
 }
 
 /* HEADER */
 .header {
- position: absolute;
-  top: 0;
-  left: 0;
-
   width: 100%;
-  z-index: 10;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 20px 80px;
+  padding: 20px;
 }
 
 /* LOGO */
-.logo img {
-  height: 50px;
-  width: auto;
+.logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 65px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+.logo-img {
+  height: auto;
+  width: 100px;
+  max-height: 65px;
+  object-fit: contain;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
+  transition: all 0.3s ease;
+}
+
+.logo-link:hover .logo-img {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+}
+
+/* Темна тема */
+.logo-dark .logo-img {
+  filter: brightness(0.95) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+.logo-dark:hover .logo-img {
+  filter: brightness(0.95) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
 /* MENU */
 .menu {
   display: flex;
   gap: 40px;
-  
   font-size: 18px;
 }
 
 .menu a {
-  text-decoration: none;
-  color: #222;
   font-size: 18px;
   font-weight: 500;
-
   transition: 0.2s;
-  color: black;
 }
 
 .menu a:hover {
@@ -53,20 +74,12 @@
 .button-right {
   display: flex;
   gap: 16px;
-  margin: 100px;
   transition: 0.2s;
 }
 
 .button-right button {
   padding: 10px 20px;
-  
-  
   border-radius: 6px;
   cursor: pointer;
-  
-
   font-size: 16px;
-}
-.LD{
-   padding: 200px 200px;
 }
