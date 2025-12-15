@@ -6,28 +6,28 @@ import Products from './Main/pages/Products.jsx'
 import AboutUs from './Main/pages/AboutUs.jsx'
 import Hero from './Main/Hero.jsx'
 import MainProducts from './Main/MainProducts.jsx'
-import Baking from './Main/pagesProducts/Baking.jsx'
-import Cakes from './Main/pagesProducts/Cakes.jsx'
-import Coffee from './Main/pagesProducts/Coffee.jsx'
-import Khachapuri from './Main/pagesProducts/Khachapuri.jsx'
-import Pizza from './Main/pagesProducts/Pizza.jsx'
-import PrivateOrders from './Main/pagesProducts/PrivateOrders.jsx'
+// import Baking from './Main/pagesProducts/Baking.jsx'
+// import Cakes from './Main/pagesProducts/Cakes.jsx'
+// import Coffee from './Main/pagesProducts/Coffee.jsx'
+// import Khachapuri from './Main/pagesProducts/Khachapuri.jsx'
+// import Pizza from './Main/pagesProducts/Pizza.jsx'
+// import PrivateOrders from './Main/pagesProducts/PrivateOrders.jsx'
 
 function App() {
   return (
     <div>
 
       <BrowserRouter>
-       <Header />
-      
-       
+        <Header />
+
+
         <Routes>
           <Route
             path='/'
             element={
               <>
-              <Hero/>
-              <MainProducts/>
+                <Hero />
+                <MainProducts />
               </>
             }
           />
