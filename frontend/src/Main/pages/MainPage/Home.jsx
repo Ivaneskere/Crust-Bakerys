@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../../../store/productsSlice";
 
 
 function Home() {
-  
-      const products = useSelector((state) => state.products.items)
+
+   const dispatch = useDispatch();
+
+   const { items, categories, selectedCategory } = useSelector((state) => state.products)
+
+   const filteredItems = selectedCategory === "All" ? items : items.filter((item) => item.category === selectedCategory)
+
    return (
 
       <div>
@@ -50,12 +56,41 @@ function Home() {
          <section className="h-screen">
             <h1 className="text-center text-5xl font-bold my-20">PRODUCTS</h1>
 
-         {products.map((item) => (
-        <p key={item.id}>{item.title}</p>
-      ))}
-           
+            <div className="flex justify-center gap-4 mb-10">
+               <button
+                  onClick={() => dispatch(setCategory("All"))}
+                  className={`px-4 py-2 border ${selectedCategory === "All" ? "bg-black text-white" : ""
+                     }`}
+               >
+                  All
+               </button>
+
+               {categories.map((cat) => (
+                  <button
+                     key={cat}
+                     onClick={() => dispatch(setCategory(cat))}
+                     className={`px-4 py-2 border ${selectedCategory === cat ? "bg-black text-white" : ""
+                        }`}
+                  >
+                     {cat}
+                  </button>
+               ))}
+            </div>
 
 
+
+            <div className="grid grid-cols-3 gap-6 px-20">
+               {filteredItems.map((item) => (
+                  <div
+                     key={item.id}
+                     className="border p-4 rounded shadow text-center"
+                  >
+                     <img src= {item.img} alt="" />
+                     <h3 className="font-bold text-xl">{item.title}</h3>
+                     <p className="text-gray-500">{item.category}</p>
+                  </div>
+               ))}
+            </div>
          </section>
       </div>
 
