@@ -4,7 +4,7 @@
         "name": "Хачапурі сирне",
         "slogan": "300г",
         "price": 100,
-        "image": "/IMG/Khachapuri/Kh_2.png",
+        "image": "/IMG/Hachapuri/Khachapuri_with_Cheese",
         "description": "Склад:  ",
         "nutrition": "1460кДж (349ккал), Б/Ж/В: 11.6/13.2/51.1"
     },
@@ -13,7 +13,7 @@
         "name": "Хачапурі М'ясне",
         "slogan": "350г",
         "price": 125,
-        "image": "/IMG/Khachapuri/Kh_1.png",
+        "image": "/IMG/Hachapuri/Khachapuri_with_Meat",
         "description": "Склад:  ",
         "nutrition": "1460кДж (349ккал), Б/Ж/В: 11.6/13.2/51.1"
     }
