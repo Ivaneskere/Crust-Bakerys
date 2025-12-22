@@ -42,12 +42,12 @@ export default function Products(){
         price: x.price,
         image: x.image,
         description: x.description,
-        category: (Number(x.id) >=500? 'Cakes' : (Number(x.id)>=300 && Number(x.id)<400? 'Baking' : (Number(x.id)>=200 && Number(x.id)<300? 'Хачапурі' : (Number(x.id)>=41 && Number(x.id)<100? 'Sushi': 'Pizza'))))
+        category: (Number(x.id) >=500? 'Торти' : (Number(x.id)>=300 && Number(x.id)<400? 'Випічка' : (Number(x.id)>=200 && Number(x.id)<300? 'Хачапурі' : (Number(x.id)>=41 && Number(x.id)<100? 'Суші': 'Піца'))))
     })),[])
 
     const [cat, setCat] = useState('All')
     const [selected, setSelected] = useState(null)
-    const categories = ['All','Pizza','Cakes','Baking','Хачапурі','Sushi','New']
+    const categories = ['Всі','Піца','Торти','Випічка','Хачапурі','Суші','Нове']
 
     const shown = all.filter(p=> cat==='All' ? true : (p.category===cat))
 
