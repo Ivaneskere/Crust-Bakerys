@@ -16,7 +16,13 @@ export default function Cart() {
     useEffect(() => {
         // Завантажити кошик з localStorage
         const savedCart = JSON.parse(localStorage.getItem('cart') || '[]')
-        setCartItems(savedCart)
+        // Переконатися що price та quantity - числа
+        const normalizedCart = savedCart.map(item => ({
+            ...item,
+            price: Number(item.price) || 0,
+            quantity: Number(item.quantity) || 1
+        }))
+        setCartItems(normalizedCart)
     }, [])
 
     const handleRemoveItem = (id) => {
@@ -26,12 +32,13 @@ export default function Cart() {
     }
 
     const handleQuantityChange = (id, qty) => {
+        // Автоматично видалити якщо quantity <= 0
         if (qty <= 0) {
             handleRemoveItem(id)
             return
         }
         const updated = cartItems.map(item =>
-            item.id === id ? { ...item, quantity: qty } : item
+            item.id === id ? { ...item, quantity: Math.max(1, Number(qty)) } : item
         )
         setCartItems(updated)
         localStorage.setItem('cart', JSON.stringify(updated))
@@ -41,8 +48,17 @@ export default function Cart() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+    // Розрахунок з гарантією що числа - числа
+    const totalPrice = cartItems.reduce((sum, item) => {
+        const price = Number(item.price) || 0
+        const qty = Number(item.quantity) || 0
+        return sum + (price * qty)
+    }, 0)
+    
+    const totalQuantity = cartItems.reduce((sum, item) => {
+        const qty = Number(item.quantity) || 0
+        return sum + qty
+    }, 0)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -169,7 +185,7 @@ export default function Cart() {
                                                 {/* Product details */}
                                                 <div className="flex-1">
                                                     <h3 className="font-semibold text-zinc-900">{item.name}</h3>
-                                                    <p className="text-sm text-zinc-600 mt-1">{item.price} грн × {item.quantity} = <strong>{item.price * item.quantity} грн</strong></p>
+                                                    <p className="text-sm text-zinc-600 mt-1">{Number(item.price) || 0} грн × {Number(item.quantity) || 0} = <strong>{(Number(item.price) || 0) * (Number(item.quantity) || 0)} грн</strong></p>
                                                 </div>
 
                                                 {/* Quantity controls */}
@@ -202,8 +218,8 @@ export default function Cart() {
 
                                     <div className="mt-6 border-t pt-4">
                                         <div className="flex justify-between text-lg font-bold text-zinc-900">
-                                            <span>Всього ({totalQuantity} шт.):</span>
-                                            <span>{totalPrice} грн</span>
+                                            <span>Всього ({Math.round(totalQuantity) || 0} шт.):</span>
+                                            <span>{Math.round(totalPrice) || 0} грн</span>
                                         </div>
                                     </div>
 
@@ -308,7 +324,7 @@ export default function Cart() {
                                     disabled={loading || cartItems.length === 0}
                                     className="w-full px-4 py-3 mt-6 bg-[#7b4a2a] text-white font-semibold rounded-lg hover:bg-[#6a3a1a] disabled:bg-zinc-300 disabled:cursor-not-allowed transition-colors"
                                 >
-                                    {loading ? 'Відправляю...' : `Замовити (${totalPrice} грн)`}
+                                    {loading ? 'Відправляю...' : `Замовити (${Math.round(totalPrice) || 0} грн)`}
                                 </button>
 
                                 <p className="text-xs text-zinc-500 text-center mt-2">

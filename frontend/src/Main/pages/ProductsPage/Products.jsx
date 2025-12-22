@@ -36,10 +36,10 @@ function ProductCard({p, onOpen}){
 
 export default function Products(){
     const all = useMemo(()=>[...pizzas, ...sushi, ...tortu, ...hachapuri, ...baking].map(x=>({
-        id: x.id || x.id,
+        id: String(x.id || ''),
         name: x.name,
         slogan: x.slogan,
-        price: x.price,
+        price: Number(x.price) || 0,
         image: x.image,
         description: x.description,
         category: (Number(x.id) >=500? 'Торти' : (Number(x.id)>=300 && Number(x.id)<400? 'Випічка' : (Number(x.id)>=200 && Number(x.id)<300? 'Хачапурі' : (Number(x.id)>=41 && Number(x.id)<100? 'Суші': 'Піца'))))
