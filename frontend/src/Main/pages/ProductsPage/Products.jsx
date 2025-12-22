@@ -116,12 +116,20 @@ export default function Products(){
                                 <p className="mt-2 text-sm text-zinc-600">{selected.description}</p>
                                 <div className="mt-4 flex items-center gap-3">
                                     <div className="text-lg font-bold">{selected.price ? selected.price + ' грн' : ''}</div>
-                                    <button onClick={()=>{ // simple cart in localStorage
+                                    <button onClick={()=>{ 
                                         const cart = JSON.parse(localStorage.getItem('cart')||'[]') || [];
-                                        cart.push(selected);
+                                        // Check if item already exists in cart
+                                        const existingItem = cart.find(item => item.id === selected.id);
+                                        if (existingItem) {
+                                            existingItem.quantity = (existingItem.quantity || 1) + 1;
+                                        } else {
+                                            cart.push({ ...selected, quantity: 1 });
+                                        }
                                         localStorage.setItem('cart', JSON.stringify(cart));
+                                        window.dispatchEvent(new Event('storage')); // Notify Header
                                         alert('Додано в кошик');
-                                    }} className="ml-auto rounded-xl bg-[#7b4a2a] px-4 py-2 text-white">Купити</button>
+                                        setSelected(null);
+                                    }} className="ml-auto rounded-xl bg-[#7b4a2a] px-4 py-2 text-white hover:bg-[#6a3a1a]">Купити</button>
                                 </div>
                             </div>
                         </div>
