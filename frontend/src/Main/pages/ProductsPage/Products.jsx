@@ -3,6 +3,7 @@ import pizzas from '../../../../DB/Pizza.json'
 import sushi from '../../../../DB/SushiSet.json'
 import tortu from '../../../../DB/tortu.json'
 import hachapuri from '../../../../DB/Hachapuri.json'
+import baking from '../../../../DB/Baking.json'
 
 function ProductCard({p, onOpen}){
     return (
@@ -23,40 +24,72 @@ function ProductCard({p, onOpen}){
 }
 
 export default function Products(){
-    const all = useMemo(()=>[...pizzas, ...sushi, ...tortu, ...hachapuri].map(x=>({
+    const all = useMemo(()=>[...pizzas, ...sushi, ...tortu, ...hachapuri, ...baking].map(x=>({
         id: x.id || x.id,
         name: x.name,
         slogan: x.slogan,
         price: x.price,
         image: x.image,
         description: x.description,
-        category: (Number(x.id) >=500? 'Cakes' : (Number(x.id)>=200 && Number(x.id)<300? 'Baking' : (Number(x.id)>=41 && Number(x.id)<100? 'Sushi': 'Pizza')))
+        category: (Number(x.id) >=500? 'Cakes' : (Number(x.id)>=300 && Number(x.id)<400? 'Baking' : (Number(x.id)>=200 && Number(x.id)<300? 'Хачапурі' : (Number(x.id)>=41 && Number(x.id)<100? 'Sushi': 'Pizza'))))
     })),[])
 
     const [cat, setCat] = useState('All')
     const [selected, setSelected] = useState(null)
-    const categories = ['All','Pizza','Cakes','Baking','Sushi','New']
+    const categories = ['All','Pizza','Cakes','Baking','Хачапурі','Sushi','New']
 
     const shown = all.filter(p=> cat==='All' ? true : (p.category===cat))
 
     return (
-        <main className="mx-auto max-w-6xl px-4 py-10">
-            <h1 className="text-3xl font-semibold text-zinc-900">Наше меню</h1>
+        <main className="bg-[#f7f1e6] text-zinc-900">
+            {/* Hero Section with Background */}
+            <section className="relative overflow-hidden">
+                <div className="absolute inset-0">
+                    <img
+                        src="/IMG/DifAll(img)/background-bakery.png"
+                        alt="background"
+                        className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-[#f7f1e6]" />
+                </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-                {categories.map(c=> (
-                    <button key={c} onClick={()=>setCat(c)} className={`rounded-xl px-4 py-2 text-sm ${cat===c? 'bg-[#7b4a2a] text-white' : 'bg-white ring-1 ring-black/5'}`}>
-                        {c}
-                    </button>
-                ))}
-            </div>
+                <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
+                    <div className="max-w-2xl">
+                        <p className="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm text-white/90 ring-1 ring-white/15 backdrop-blur">
+                            Меню
+                        </p>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {shown.map(p=> (
-                    <div key={p.id}>
-                        <ProductCard p={p} onOpen={setSelected} />
+                        <h1 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                            Наше улюблене меню
+                        </h1>
+
+                        <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
+                            Виберіть щось смачненьке з наших найпопулярніших страв
+                        </p>
                     </div>
-                ))}
+                </div>
+            </section>
+
+            <div className="mx-auto max-w-6xl px-4 pb-20">
+                <div className="-mt-10 rounded-3xl bg-[#f3eadb] p-6 shadow-sm ring-1 ring-black/5 sm:p-10">
+                    {/* Category Buttons */}
+                    <div className="mt-6 flex flex-wrap gap-3 mb-8">
+                        {categories.map(c=> (
+                            <button key={c} onClick={()=>setCat(c)} className={`rounded-xl px-4 py-2 text-sm font-medium transition-all ${cat===c? 'bg-[#7b4a2a] text-white shadow-md' : 'bg-white ring-1 ring-black/5 hover:ring-black/10'}`}>
+                                {c}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Products Grid */}
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {shown.map(p=> (
+                            <div key={p.id}>
+                                <ProductCard p={p} onOpen={setSelected} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             {selected && (
