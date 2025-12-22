@@ -6,9 +6,20 @@ import hachapuri from '../../../../DB/Hachapuri.json'
 import baking from '../../../../DB/Baking.json'
 
 function ProductCard({p, onOpen}){
+    // Карточка продукту — мала, автономна, з hover-ефектами
     return (
         <div className="group rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden shadow-sm transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-            <img src={p.image} alt={p.name} className="h-40 w-full object-cover transition-transform duration-200 group-hover:scale-105" />
+            <img
+                src={p.image}
+                alt={p.name}
+                // асинхронне декодування та lazy-loading знижують навантаження при скролі
+                loading="lazy"
+                decoding="async"
+                // will-change допомагає браузеру оптимізувати анімації
+                style={{ willChange: 'transform' }}
+                className="h-40 w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                onError={(e)=>{ e.currentTarget.onerror = null; e.currentTarget.src = '/IMG/Logo/logoImg.png' }}
+            />
             <div className="p-4">
                 <h3 className="text-sm font-semibold">{p.name}</h3>
                 <p className="mt-1 text-xs text-zinc-500">{p.slogan || ''}</p>
@@ -42,13 +53,14 @@ export default function Products(){
 
     return (
         <main className="bg-[#f7f1e6] text-zinc-900">
-            {/* Hero Section with Background */}
+            {/* Hero Section with CSS background for better scrolling perf */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img
-                        src="/IMG/DifAll(img)/background-bakery.png"
-                        alt="background"
-                        className="h-full w-full object-cover"
+                    {/* Використовуємо фон через CSS — це краще для продуктивності при скролі */}
+                    <div
+                        className="h-full w-full bg-cover bg-center"
+                        style={{ backgroundImage: "url('/IMG/DifAll(img)/background-bakery.png')" }}
+                        aria-hidden="true"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-[#f7f1e6]" />
                 </div>
@@ -73,9 +85,10 @@ export default function Products(){
             <div className="mx-auto max-w-6xl px-4 pb-20">
                 <div className="-mt-10 rounded-3xl bg-[#f3eadb] p-6 shadow-sm ring-1 ring-black/5 sm:p-10">
                     {/* Category Buttons */}
+                        <h3 className="text-sm font-semibold text-zinc-700 mb-3">Категорії</h3>
                     <div className="mt-6 flex flex-wrap gap-3 mb-8">
                         {categories.map(c=> (
-                            <button key={c} onClick={()=>setCat(c)} className={`rounded-xl px-4 py-2 text-sm font-medium transition-all ${cat===c? 'bg-[#7b4a2a] text-white shadow-md' : 'bg-white ring-1 ring-black/5 hover:ring-black/10'}`}>
+                            <button key={c} onClick={()=>setCat(c)} className={`rounded-xl px-4 py-2 text-sm font-medium transition-all transform hover:-translate-y-0.5 ${cat===c? 'bg-[#7b4a2a] text-white shadow-md' : 'bg-white ring-1 ring-black/5 hover:ring-black/10'}`}>
                                 {c}
                             </button>
                         ))}
@@ -97,7 +110,7 @@ export default function Products(){
                     <div className="absolute inset-0 bg-black/50" onClick={()=>setSelected(null)} />
                     <div className="relative z-10 w-full max-w-2xl rounded-2xl bg-white p-6">
                         <div className="flex gap-4">
-                            <img src={selected.image} alt={selected.name} className="h-40 w-40 object-cover rounded-lg" />
+                            <img src={selected.image} alt={selected.name} loading="lazy" decoding="async" onError={(e)=>{ e.currentTarget.onerror=null; e.currentTarget.src='/IMG/Logo/logoImg.png' }} className="h-40 w-40 object-cover rounded-lg" />
                             <div>
                                 <h2 className="text-xl font-semibold">{selected.name}</h2>
                                 <p className="mt-2 text-sm text-zinc-600">{selected.description}</p>
