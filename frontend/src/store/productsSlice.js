@@ -1,25 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-    categories: ["Baking", "Pizza", "Cakes", "Sushi"],
+    categories: ["All", "Pizza", "Cakes", "Baking", "Sushi", "New"],
     selectedCategory: "All",
     items: [
-        { id: 1, title: "Hachapuri", category: "Baking", img: './IMG/Hachapuri/Kh_2.png'  },
-        { id: 2, title: "Sushi1", category: "Sushi", img: './IMG/Sushi/Roll_1.jpg' },
-        { id: 3, title: "Sushi2", category: "Sushi", img: './IMG/Sushi/Roll_2.jpg' },
-        { id: 4, title: "Sushi3", category: "Sushi", img: './IMG/Sushi/Roll_3.jpg' },
-        { id: 5, title: "Sushi4", category: "Sushi", img: './IMG/Sushi/Roll_4.jpg' },
-        { id: 6, title: "Pizza1", category: "Pizza", img: './IMG/Pizza/Pizza_1.png' },
-        { id: 7, title: "Pizza2", category: "Pizza", img: './IMG/Pizza/Pizza_2.png' },
-        { id: 8, title: "Pizza3", category: "Pizza", img: './IMG/Pizza/Pizza_3.png' },
-        { id: 9, title: "Pizza4", category: "Pizza", img: './IMG/Pizza/Pizza_4.png' },
-        { id: 10, title: "Chocolate Cake1", category: "Cakes", img: './IMG/Tortu/Tort_1.png' },
-        { id: 11, title: "Chocolate Cake2", category: "Cakes", img: './IMG/Tortu/Tort_2.png' },
-        { id: 12, title: "Chocolate Cake3", category: "Cakes", img: './IMG/Tortu/Tort_3.png' },
-        { id: 13, title: "Chocolate Cake4", category: "Cakes", img: './IMG/Tortu/Tort_4.png' },
+        // Hachapuri / Baking
+        { id: 200, title: "Хачапурі сирне", category: "Baking", img: '/IMG/productsImages/Khachapuri_with_Cheese.png' },
+        { id: 201, title: "Хачапурі М\'ясне", category: "Baking", img: '/IMG/productsImages/Khachapuri_with_Meat.png' },
+        // Pizza (examples)
+        { id: 100, title: "Піца Салямі", category: "Pizza", img: '/IMG/productsImages/Pizza_Salami.png' },
+        { id: 101, title: "Піца Кантарі", category: "Pizza", img: '/IMG/productsImages/Pizza_Kantari.png' },
+        { id: 103, title: "Піца Баварська", category: "Pizza", img: '/IMG/productsImages/Pizza_Bavarian.png' },
+        { id: 104, title: "Піца Чотири Сири", category: "Pizza", img: '/IMG/productsImages/Pizza_Four_cheeses.png' },
+        // Sushi (examples)
+        { id: 41, title: "Рол Філадельфія Де Люкс Лосось", category: "Sushi", img: '/IMG/productsImages/Roll_Philadelphia_De_luxe_Salmon.jpg' },
+        { id: 42, title: "Рол Каліфорнія Манго", category: "Sushi", img: '/IMG/productsImages/Roll_California_mango.jpg' },
+        { id: 43, title: "Рол Каліфорнія Зелений дракон", category: "Sushi", img: '/IMG/productsImages/Roll_California_Green_dragon.jpg' },
+        // Tortu / Cakes
+        { id: 500, title: "Торт Шер-Амі", category: "Cakes", img: '/IMG/productsImages/Tort_Sher_Ami.png' },
+        { id: 501, title: "Торт Наполеон", category: "Cakes", img: '/IMG/productsImages/Tort_Napoleon.png' },
     ],
-   
-
-
 }
 export const productsSlice = createSlice({
     name: 'products',
