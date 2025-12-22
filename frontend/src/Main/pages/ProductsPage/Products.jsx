@@ -6,8 +6,8 @@ import hachapuri from '../../../../DB/Hachapuri.json'
 
 function ProductCard({p, onOpen}){
     return (
-        <div className="rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden shadow-sm">
-            <img src={p.image} alt={p.name} className="h-40 w-full object-cover" />
+        <div className="group rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden shadow-sm transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+            <img src={p.image} alt={p.name} className="h-40 w-full object-cover transition-transform duration-200 group-hover:scale-105" />
             <div className="p-4">
                 <h3 className="text-sm font-semibold">{p.name}</h3>
                 <p className="mt-1 text-xs text-zinc-500">{p.slogan || ''}</p>
