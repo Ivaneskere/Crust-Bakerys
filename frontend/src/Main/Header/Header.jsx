@@ -1,7 +1,32 @@
 import { Link, NavLink } from "react-router-dom";
 import { Logo } from "./Logo.jsx";
+import { useState, useEffect } from "react";
 
 function Header() {
+  const [cartCount, setCartCount] = useState(0);
+
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const count = cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
+    setCartCount(count);
+  };
+
+  useEffect(() => {
+    // Отримати кількість товарів з localStorage на початку
+    updateCartCount();
+
+    // Слухати custom event при зміні кошика в тому ж табу
+    window.addEventListener('cartUpdated', updateCartCount);
+    
+    // Слухати storage event для інших табів
+    window.addEventListener('storage', updateCartCount);
+
+    return () => {
+      window.removeEventListener('cartUpdated', updateCartCount);
+      window.removeEventListener('storage', updateCartCount);
+    };
+  }, []);
+
   const linkBase =
     "rounded-2xl px-4 py-2 text-sm font-medium transition-all duration-200";
   const linkActive =
@@ -50,11 +75,16 @@ function Header() {
 
           <div className="flex items-center gap-2">
             <Link
-              to="/Basket"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#f7f1e6] px-4 py-2 text-sm font-semibold text-[#2f241a] ring-1 ring-black/5 transition hover:bg-[#f2e6d2]"
+              to="/Cart"
+              className="relative inline-flex items-center gap-2 rounded-2xl bg-[#f7f1e6] px-4 py-2 text-sm font-semibold text-[#2f241a] ring-1 ring-black/5 transition hover:bg-[#f2e6d2]"
             >
-              <span className="text-base leading-none">🧺</span>
+              <span className="text-base leading-none">🛒</span>
               <span className="hidden sm:inline">Кошик</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 inline-flex items-center justify-center h-6 w-6 rounded-full bg-red-500 text-white text-xs font-bold">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
             <Link
