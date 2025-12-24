@@ -5,21 +5,26 @@ import { useState, useEffect } from "react";
 function Header() {
   const [cartCount, setCartCount] = useState(0);
 
-  useEffect(() => {
-    // Отримати кількість товарів з localStorage
+  const updateCartCount = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const count = cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
     setCartCount(count);
+  };
 
-    // Слухати зміни в localStorage
-    const handleStorageChange = () => {
-      const updatedCart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const updatedCount = updatedCart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-      setCartCount(updatedCount);
+  useEffect(() => {
+    // Отримати кількість товарів з localStorage на початку
+    updateCartCount();
+
+    // Слухати custom event при зміні кошика в тому ж табу
+    window.addEventListener('cartUpdated', updateCartCount);
+    
+    // Слухати storage event для інших табів
+    window.addEventListener('storage', updateCartCount);
+
+    return () => {
+      window.removeEventListener('cartUpdated', updateCartCount);
+      window.removeEventListener('storage', updateCartCount);
     };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const linkBase =

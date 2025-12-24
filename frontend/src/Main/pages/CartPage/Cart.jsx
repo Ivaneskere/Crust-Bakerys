@@ -29,6 +29,7 @@ export default function Cart() {
         const updated = cartItems.filter(item => item.id !== id)
         setCartItems(updated)
         localStorage.setItem('cart', JSON.stringify(updated))
+        window.dispatchEvent(new Event('cartUpdated'))
     }
 
     const handleQuantityChange = (id, qty) => {
@@ -42,13 +43,14 @@ export default function Cart() {
         )
         setCartItems(updated)
         localStorage.setItem('cart', JSON.stringify(updated))
+        window.dispatchEvent(new Event('cartUpdated'))
     }
 
     const handleFormChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    // Розрахунок з гарантією що числа - числа
+
     const totalPrice = cartItems.reduce((sum, item) => {
         const price = Number(item.price) || 0
         const qty = Number(item.quantity) || 0
@@ -66,7 +68,7 @@ export default function Cart() {
         setLoading(true)
 
         if (!formData.customerName || !formData.phone || !formData.address) {
-            setError('Будь ласка, заповніть усі обов\'язкові поля')
+            setError(`Будь ласка, заповніть усі обов'язкові поля`)
             setLoading(false)
             return
         }
@@ -107,7 +109,8 @@ export default function Cart() {
 
             const result = await response.json()
             
-            // Успіх
+            // Успіх - очистити кошик та показати ID замовлення
+            console.log('Замовлення створено:', result.orderId)
             setSuccess(true)
             setCartItems([])
             localStorage.removeItem('cart')
@@ -132,6 +135,7 @@ export default function Cart() {
         if (window.confirm('Очистити кошик?')) {
             setCartItems([])
             localStorage.removeItem('cart')
+            window.dispatchEvent(new Event('cartUpdated'))
         }
     }
 

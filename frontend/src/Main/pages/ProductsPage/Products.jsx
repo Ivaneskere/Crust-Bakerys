@@ -45,11 +45,19 @@ export default function Products(){
         category: (Number(x.id) >=500? 'Торти' : (Number(x.id)>=300 && Number(x.id)<400? 'Випічка' : (Number(x.id)>=200 && Number(x.id)<300? 'Хачапурі' : (Number(x.id)>=41 && Number(x.id)<100? 'Суші': 'Піца'))))
     })),[])
 
-    const [cat, setCat] = useState('All')
+    const [cat, setCat] = useState('Всі')
     const [selected, setSelected] = useState(null)
+    const [sortBy, setSortBy] = useState('none')
     const categories = ['Всі','Піца','Торти','Випічка','Хачапурі','Суші','Нове']
 
-    const shown = all.filter(p=> cat==='All' ? true : (p.category===cat))
+    let shown = all.filter(p=> cat==='Всі' ? true : (p.category===cat))
+    
+    // Apply sorting
+    if (sortBy === 'asc') {
+        shown = [...shown].sort((a, b) => a.price - b.price)
+    } else if (sortBy === 'desc') {
+        shown = [...shown].sort((a, b) => b.price - a.price)
+    }
 
     return (
         <main className="bg-[#f7f1e6] text-zinc-900">
@@ -92,6 +100,41 @@ export default function Products(){
                                 {c}
                             </button>
                         ))}
+                    </div>
+
+                    {/* Sorting Controls */}
+                    <div className="mb-6 flex items-center gap-3">
+                        <span className="text-sm font-medium text-zinc-700">Сортування:</span>
+                        <button
+                            onClick={() => setSortBy('none')}
+                            className={`rounded-lg px-3 py-2 text-sm font-medium transition-all ${
+                                sortBy === 'none'
+                                    ? 'bg-[#7b4a2a] text-white shadow-md'
+                                    : 'bg-white ring-1 ring-black/5 hover:ring-black/10'
+                            }`}
+                        >
+                            За замовчуванням
+                        </button>
+                        <button
+                            onClick={() => setSortBy('asc')}
+                            className={`rounded-lg px-3 py-2 text-sm font-medium transition-all ${
+                                sortBy === 'asc'
+                                    ? 'bg-[#7b4a2a] text-white shadow-md'
+                                    : 'bg-white ring-1 ring-black/5 hover:ring-black/10'
+                            }`}
+                        >
+                            Ціна ↑
+                        </button>
+                        <button
+                            onClick={() => setSortBy('desc')}
+                            className={`rounded-lg px-3 py-2 text-sm font-medium transition-all ${
+                                sortBy === 'desc'
+                                    ? 'bg-[#7b4a2a] text-white shadow-md'
+                                    : 'bg-white ring-1 ring-black/5 hover:ring-black/10'
+                            }`}
+                        >
+                            Ціна ↓
+                        </button>
                     </div>
 
                     {/* Products Grid */}
