@@ -10,7 +10,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// Order Schema (inline for simplicity)
 const orderSchema = new mongoose.Schema({
     customerName: String,
     phone: String,
@@ -27,7 +26,7 @@ const orderSchema = new mongoose.Schema({
     totalQuantity: Number,
     notes: String,
     createdAt: { type: Date, default: Date.now },
-    status: { type: String, default: 'pending' } // pending, confirmed, shipped, delivered
+    status: { type: String, default: 'pending' }
 })
 
 const Order = mongoose.model('Order', orderSchema)
@@ -42,7 +41,6 @@ mongoose.connect(process.env.MONGO_URI)
         process.exit(1);
     });
 
-// Отриманння даннних з сервера
 app.get('/products', async (req, res) => {
     try {
         const products = await Product.find()
@@ -53,7 +51,6 @@ app.get('/products', async (req, res) => {
     
 })
 
-// Create new order
 app.post('/orders', async (req, res) => {
     try {
         const { customerName, phone, address, email, items, totalPrice, totalQuantity, notes } = req.body
@@ -80,7 +77,6 @@ app.post('/orders', async (req, res) => {
     }
 })
 
-// Get all orders
 app.get('/orders', async (req, res) => {
     try {
         const orders = await Order.find().sort({ createdAt: -1 })
@@ -90,7 +86,6 @@ app.get('/orders', async (req, res) => {
     }
 })
 
-// Get order by ID
 app.get('/orders/:id', async (req, res) => {
     try {
         const order = await Order.findById(req.params.id)
