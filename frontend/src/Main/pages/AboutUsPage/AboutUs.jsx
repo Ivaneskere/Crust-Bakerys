@@ -1,3 +1,5 @@
+import { Page } from "../../../components/Page";
+
 export default function AboutUs() {
     const values = [
         {
@@ -39,7 +41,8 @@ export default function AboutUs() {
     ];
 
     return (
-        <main className="bg-[#f7f1e6] text-zinc-900">
+        <Page>
+            <main className="bg-[#f7f1e6] text-zinc-900">
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
                     <img
@@ -261,5 +264,6 @@ export default function AboutUs() {
                 </section>
             </div>
         </main>
+        </Page>
     );
 }

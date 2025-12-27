@@ -7,6 +7,7 @@ import sushi from '../../../../DB/SushiSet.json'
 import tortu from '../../../../DB/tortu.json'
 import hachapuri from '../../../../DB/Hachapuri.json'
 import baking from '../../../../DB/Baking.json'
+import { Page } from '../../../components/Page'
 
 function ProductCard({p, onOpen}){
     return (
@@ -60,6 +61,7 @@ export default function Products(){
     }
 
     return (
+        <Page>
         <main className="bg-[#f7f1e6] text-zinc-900">
             
             <section className="relative overflow-hidden">
@@ -181,5 +183,6 @@ export default function Products(){
                 </div>
             )}
         </main>
+        </Page>
     )
 }
