@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../../store/productsSlice";
+import { Page } from "../../../components/Page";
 
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
    const filteredItems = selectedCategory === "All" ? items : items.filter((item) => item.category === selectedCategory)
 
    return (
-
+      <Page>
       <div>
 
          <section className="relative w-screen h-screen overflow-hidden">
@@ -93,9 +94,6 @@ function Home() {
             </div>
          </section>
       </div>
-
-
-
-
+   </Page>
    )
 } export default Home;

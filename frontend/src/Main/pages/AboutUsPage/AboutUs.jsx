@@ -1,3 +1,5 @@
+import { Page } from "../../../components/Page";
+
 export default function AboutUs() {
     const values = [
         {
@@ -39,7 +41,8 @@ export default function AboutUs() {
     ];
 
     return (
-        <main className="bg-[#f7f1e6] text-zinc-900">
+        <Page>
+            <main className="bg-[#f7f1e6] text-zinc-900">
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
                     <img
@@ -107,7 +110,7 @@ export default function AboutUs() {
                                 <div className="p-5">
                                     <h3 className="text-lg font-semibold">{t.title}</h3>
                                     <p className="mt-2 text-sm leading-relaxed text-zinc-600">
-                                        Потім додаси нормальний текст (1–2 речення).
+                                        Ми більше ніж просто Пекарня❤️
                                     </p>
                                 </div>
                             </article>
@@ -177,12 +180,6 @@ export default function AboutUs() {
                                     Познайомитись з командою
                                 </a>
 
-                                <a
-                                    href="#gallery"
-                                    className="rounded-xl bg-zinc-900/5 px-6 py-3 text-sm font-medium text-zinc-900 ring-1 ring-black/5 hover:bg-zinc-900/10"
-                                >
-                                    Behind the scenes
-                                </a>
                             </div>
                         </div>
 
@@ -223,36 +220,15 @@ export default function AboutUs() {
                     </div>
                 </section>
 
-                <section id="gallery" className="mt-10 rounded-3xl bg-[#f3eadb] p-6 ring-1 ring-black/5 sm:p-10">
-                    <div className="flex items-center justify-between gap-6">
-                        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">За лаштунками</h2>
-                        <span className="hidden h-px flex-1 bg-zinc-900/10 sm:block" />
-                    </div>
-
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        {gallery.map((src, i) => (
-                            <div key={`${src}-${i}`} className="group relative overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
-                                <img
-                                    src={src}
-                                    alt={`Gallery ${i + 1}`}
-                                    className="h-44 w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-                                />
-                                <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
-                                    <div className="absolute inset-0 bg-black/15" />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
 
                 <section className="mt-10 rounded-3xl bg-white p-6 ring-1 ring-black/5 sm:p-10">
                     <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Трохи цифр</h2>
 
                     <div className="mt-6 grid gap-4 sm:grid-cols-3">
                         {[
-                            { big: "5+", label: "років досвіду" },
-                            { big: "1000+", label: "клієнтів" },
-                            { big: "50+", label: "рецептів" },
+                            { big: "8+", label: "років досвіду" },
+                            { big: "500000+", label: "клієнтів" },
+                            { big: "100+", label: "рецептів" },
                         ].map((s) => (
                             <div key={s.label} className="rounded-2xl bg-[#f7f1e6] p-6 ring-1 ring-black/5">
                                 <div className="text-3xl font-semibold tracking-tight text-zinc-900">{s.big}</div>
@@ -288,5 +264,6 @@ export default function AboutUs() {
                 </section>
             </div>
         </main>
+        </Page>
     );
 }
