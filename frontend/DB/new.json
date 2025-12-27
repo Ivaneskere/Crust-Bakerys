@@ -6,7 +6,8 @@
         "price": 110,
         "image": "/IMG/Pizza/Pizza_Four_Seasons.png",
         "description": "Склад: соус томатний, соус вершковий, шинка, пепероні, бекон, куряче філе, гриби, помідор, кукурудза, цибуля, огірок, сир моцарела (в одній піці поєднуються чотири смаки",
-        "nutrition": "1410кДж (337ккал), Б/Ж/У: 12.8/8.9/51.1"
+        "nutrition": "1410кДж (337ккал), Б/Ж/У: 12.8/8.9/51.1",
+         "category": "Baking"
     },
     {
         "id": "401",
@@ -15,7 +16,9 @@
         "price": "30",
         "image": "/IMG/Vupichka/kzm_1.jpg",
         "description": "Склад: ",
-        "nutrition": ""
+        "nutrition": "",
+         "category": "Baking"
+       
     },
     {
         "id": "402",
@@ -24,6 +27,7 @@
         "price": "30",
         "image": "/IMG/Vupichka/sl_1.jpg",
         "description": "Склад: ",
-        "nutrition": ""
+        "nutrition": "",
+         "category": "Baking"
     }
 ]

@@ -6,7 +6,7 @@ import hachapuri from '../../../../DB/Hachapuri.json'
 import baking from '../../../../DB/Baking.json'
 
 function ProductCard({p, onOpen}){
-    // Карточка продукту — мала, автономна, з hover-ефектами
+   
     return (
         <div className="group rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden shadow-sm transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
             <img

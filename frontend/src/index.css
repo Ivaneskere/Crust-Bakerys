@@ -3,3 +3,10 @@
 html {
     scroll-behavior: smooth;
 }
+body{
+     background-image: url("/IMG/DifAll/background-bakery.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

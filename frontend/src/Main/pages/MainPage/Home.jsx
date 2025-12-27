@@ -1,30 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../../store/productsSlice";
+import { fetchProducts, setCategory } from "../../../store/productsSlice";
+import { useEffect } from "react";
 
 
 function Home() {
 
    const dispatch = useDispatch();
 
+   useEffect(() => {
+      dispatch(fetchProducts())
+   }, [])
+
    const { items, categories, selectedCategory } = useSelector((state) => state.products)
 
-   const filteredItems = selectedCategory === "All" ? items : items.filter((item) => item.category === selectedCategory)
+   
 
+   const filteredItems = selectedCategory === "All" ? items.slice(0,6) : items.filter((item) => item.category === selectedCategory).slice(0,6)
    return (
 
       <div>
 
-         <section className="relative w-screen h-screen overflow-hidden">
+         <section className="relative w-screen min-h-screen overflow-hidden">
 
             {/* КАРТИНКА */}
-            <img
-               src="/IMG/BGMain/img2.jpg"
-               alt="bg"
-               className="absolute inset-0 w-full h-full object-cover"
-            />
-
-            {/* ЗАТЕМНЕНИЕ */}
-            <div className="absolute inset-0 bg-black/40"></div>
+            
 
             {/* КОНТЕНТ СЛЕВА */}
             <div className="relative z-10 h-full">
@@ -54,7 +53,10 @@ function Home() {
          </section >
 
          <section className="h-screen">
-            <h1 className="text-center text-5xl font-bold my-20">PRODUCTS</h1>
+            
+            <h1 className="text-center text-5xl font-bold -mt-32 mb-20">PRODUCTS</h1>
+
+            
 
             <div className="flex justify-center gap-4 mb-10">
                <button
@@ -82,11 +84,11 @@ function Home() {
             <div className="grid grid-cols-3 gap-6 px-20">
                {filteredItems.map((item) => (
                   <div
-                     key={item.id}
+                     key={ item.id}
                      className="border p-4 rounded shadow text-center"
                   >
-                     <img src= {item.img} alt="" />
-                     <h3 className="font-bold text-xl">{item.title}</h3>
+                     <img src= {item.image} alt={item.name} />
+                     <h3 className="font-bold text-xl">{item.name}</h3>
                      <p className="text-gray-500">{item.category}</p>
                   </div>
                ))}

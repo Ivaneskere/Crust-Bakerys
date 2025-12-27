@@ -6,7 +6,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_Philadelphia_De_luxe_Salmon.jpg",
     "description": "Склад: Рис, Листя норі, Вершковий Сир, Огірок/авокадо, Лосось",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+     "category": "Sushi"
   },
   {
     "id": "42",
@@ -15,7 +16,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_mango.jpg",
     "description": "Склад: Рис, Листя норі, Вершковий сир, Манго, Авокадо/Огірок, Лосось, Кунжут, Унагі",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "43",
@@ -24,7 +26,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Green_dragon.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок, Креветка,  Авокадо,Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "44",
@@ -33,7 +36,8 @@
     "price": "200",
     "image": "/IMG/Sushi/Roll_Rainbow_Roll.jpg",
     "description": "Склад: Рис,  Листя норі, Вершковий Сир, Манго, Авокадо, Лосось, Соус Унагі, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "45",
@@ -42,7 +46,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Salmon.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок/авокадо, Лосось, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "46",
@@ -51,7 +56,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Hiashi.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок/авокадо, Лосось, Хіяші (чука), Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "47",
@@ -60,7 +66,8 @@
     "price": "200",
     "image": "/IMG/Sushi/Roll_Volcano_shrimp.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок/Авокадо, Креветка, Соус Солодкий Чилі",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "48",
@@ -69,7 +76,8 @@
     "price": "150",
     "image": "/IMG/Sushi/Roll_Mini_Volcan.jpg",
     "description": "Склад: Рис, Листя Норі,  Вершковий Сир, Огірок/Авокадо, Ікра",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "49",
@@ -78,7 +86,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Crab.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок/авокадо, Краби, Майонез, Ікра тобіко, Кунждут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "50",
@@ -87,7 +96,8 @@
     "price": "120",
     "image": "/IMG/Sushi/Sushi_Salmon.jpg",
     "description": "Склад: рис, лосось",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "51",
@@ -96,7 +106,9 @@
     "price": "210",
     "image": "/IMG/Sushi/Roll_Philadelphia_De_luxe_Salmon_Eal.jpg",
     "description": "Склад: Рис, Листя норі, Вершковий Сир, Огірок/авокадо, Лосось, Вугор, Соус Унагі, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
+
   },
   {
     "id": "52",
@@ -105,7 +117,8 @@
     "price": "210",
     "image": "/IMG/Sushi/Roll_Philadelphia_De_luxe_Salmon_Shrimp.jpg",
     "description": "Склад: Рис, Листя норі, Вершковий Сир, Огірок/авокадо, Лосось, Креветка, Соус Унагі, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "53",
@@ -114,7 +127,8 @@
     "price": "220",
     "image": "/IMG/Sushi/Roll_Maki_XL.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Лосось, Огірок/авокадо, Соус Унагі, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "54",
@@ -123,7 +137,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Tuna.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Тунець, Огірок/авокадо, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "55",
@@ -132,7 +147,8 @@
     "price": "190",
     "image": "/IMG/Sushi/Roll_California_Chili_Cheese.jpg",
     "description": "Склад: Рис, Листя Норі, Вершковий Сир, Огірок/авокадо, Сир Чедер, Соус солодкий чилі",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   },
   {
     "id": "56",
@@ -141,6 +157,7 @@
     "price": "220",
     "image": "/IMG/Sushi/Roll_Philadelphia_De_luxe_Salmon_Tuna.jpg",
     "description": "Склад: Рис, Листя норі, Вершковий Сир, Огірок/авокадо, Лосось, Тунець, Соус Унагі, Кунжут",
-    "nutrition": "200ккал, Б/Ж/У: 2/3/15"
+    "nutrition": "200ккал, Б/Ж/У: 2/3/15",
+    "category": "Sushi"
   }
 ]
