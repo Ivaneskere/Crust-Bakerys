@@ -37,7 +37,7 @@ app.get("/products", (req, res) => {
       ...news,
     ];
 
-    res.json(allProducts);
+    return res.json(allProducts);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
