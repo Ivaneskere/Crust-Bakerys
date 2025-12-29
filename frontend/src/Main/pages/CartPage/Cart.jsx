@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeItem, updateQuantity, clearCart, setCart } from '../../../store/cartSlice'
+import { showToast } from '../../../components/showToast'
 
 export default function Cart() {
-    const [cartItems, setCartItems] = useState([])
+    const dispatch = useDispatch()
+    const cartItems = useSelector(s => s.cart.items || [])
     const [formData, setFormData] = useState({
         customerName: '',
         phone: '',
@@ -14,35 +18,32 @@ export default function Cart() {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        // Завантажити кошик з localStorage
-        const savedCart = JSON.parse(localStorage.getItem('cart') || '[]')
-        // Переконатися що price та quantity - числа
-        const normalizedCart = savedCart.map(item => ({
-            ...item,
-            price: Number(item.price) || 0,
-            quantity: Number(item.quantity) || 1
-        }))
-        setCartItems(normalizedCart)
-    }, [])
+        try {
+            const raw = localStorage.getItem('cart')
+            if (raw) dispatch(setCart(JSON.parse(raw)))
+        } catch {
+            void 0
+        }
+    }, [dispatch])
 
-    const handleRemoveItem = (id) => {
-        const updated = cartItems.filter(item => item.id !== id)
-        setCartItems(updated)
-        localStorage.setItem('cart', JSON.stringify(updated))
+    const handleRemoveItem = (item) => {
+        dispatch(removeItem(item.id))
         window.dispatchEvent(new Event('cartUpdated'))
+        try {
+            const name = item?.name || 'товар'
+            showToast(`Видалено • ${name} • з кошику`, { actions: [{ label: 'OK', onClick: () => {} }], timeout: 3000 })
+        } catch {
+            void 0
+        }
     }
 
     const handleQuantityChange = (id, qty) => {
-        // Автоматично видалити якщо quantity <= 0
         if (qty <= 0) {
-            handleRemoveItem(id)
+            const item = cartItems.find(i => i.id === id)
+            if (item) handleRemoveItem(item)
             return
         }
-        const updated = cartItems.map(item =>
-            item.id === id ? { ...item, quantity: Math.max(1, Number(qty)) } : item
-        )
-        setCartItems(updated)
-        localStorage.setItem('cart', JSON.stringify(updated))
+        dispatch(updateQuantity({ id, quantity: Math.max(1, Number(qty)) }))
         window.dispatchEvent(new Event('cartUpdated'))
     }
 
@@ -109,11 +110,9 @@ export default function Cart() {
 
             const result = await response.json()
             
-            // Успіх - очистити кошик та показати ID замовлення
             console.log('Замовлення створено:', result.orderId)
             setSuccess(true)
-            setCartItems([])
-            localStorage.removeItem('cart')
+            dispatch(clearCart())
             setFormData({
                 customerName: '',
                 phone: '',
@@ -122,7 +121,6 @@ export default function Cart() {
                 notes: ''
             })
 
-            // Показати повідомлення про успіх на 5 секунд
             setTimeout(() => setSuccess(false), 5000)
         } catch (err) {
             setError(err.message || 'Помилка при відправці замовлення')
@@ -131,10 +129,9 @@ export default function Cart() {
         }
     }
 
-    const clearCart = () => {
+    const handleClearCart = () => {
         if (window.confirm('Очистити кошик?')) {
-            setCartItems([])
-            localStorage.removeItem('cart')
+            dispatch(clearCart())
             window.dispatchEvent(new Event('cartUpdated'))
         }
     }
@@ -142,7 +139,6 @@ export default function Cart() {
     return (
         <main className="bg-[#f7f1e6] min-h-screen py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
-                {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold text-zinc-900">Мій кошик</h1>
                     <p className="mt-2 text-zinc-600">Перегляньте своє замовлення і завершіть покупку</p>
@@ -163,7 +159,6 @@ export default function Cart() {
                 )}
 
                 <div className="grid gap-8 lg:grid-cols-3">
-                    {/* Cart Items */}
                     <div className="lg:col-span-2">
                         <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 shadow-sm">
                             {cartItems.length === 0 ? (
@@ -178,7 +173,7 @@ export default function Cart() {
                                     <div className="space-y-4">
                                         {cartItems.map(item => (
                                             <div key={item.id} className="flex gap-4 p-4 bg-[#f9f7f4] rounded-lg border border-black/5">
-                                                {/* Product image */}
+                                                
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
@@ -186,13 +181,12 @@ export default function Cart() {
                                                     onError={(e) => { e.currentTarget.src = '/IMG/Logo/logoImg.png' }}
                                                 />
                                                 
-                                                {/* Product details */}
                                                 <div className="flex-1">
                                                     <h3 className="font-semibold text-zinc-900">{item.name}</h3>
                                                     <p className="text-sm text-zinc-600 mt-1">{Number(item.price) || 0} грн × {Number(item.quantity) || 0} = <strong>{(Number(item.price) || 0) * (Number(item.quantity) || 0)} грн</strong></p>
                                                 </div>
 
-                                                {/* Quantity controls */}
+                                                
                                                 <div className="flex flex-col items-end justify-between">
                                                     <div className="flex gap-1 bg-white rounded-lg ring-1 ring-black/10">
                                                         <button
@@ -210,7 +204,7 @@ export default function Cart() {
                                                         </button>
                                                     </div>
                                                     <button
-                                                        onClick={() => handleRemoveItem(item.id)}
+                                                        onClick={() => handleRemoveItem(item)}
                                                         className="text-sm text-red-600 hover:text-red-800 mt-2"
                                                     >
                                                         Видалити
@@ -228,7 +222,7 @@ export default function Cart() {
                                     </div>
 
                                     <button
-                                        onClick={clearCart}
+                                        onClick={handleClearCart}
                                         className="mt-4 w-full px-4 py-2 text-sm text-zinc-600 bg-zinc-100 rounded-lg hover:bg-zinc-200"
                                     >
                                         Очистити кошик
@@ -238,13 +232,12 @@ export default function Cart() {
                         </div>
                     </div>
 
-                    {/* Order Form */}
                     <div className="lg:col-span-1">
                         <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 shadow-sm sticky top-6">
                             <h2 className="text-xl font-bold text-zinc-900 mb-4">Форма замовлення</h2>
 
                             <form onSubmit={handleSubmit} className="space-y-4">
-                                {/* Customer Name */}
+                                
                                 <div>
                                     <label className="block text-sm font-medium text-zinc-700 mb-1">
                                         Ім'я <span className="text-red-500">*</span>
@@ -260,7 +253,7 @@ export default function Cart() {
                                     />
                                 </div>
 
-                                {/* Phone */}
+                                
                                 <div>
                                     <label className="block text-sm font-medium text-zinc-700 mb-1">
                                         Номер телефону <span className="text-red-500">*</span>
@@ -276,7 +269,7 @@ export default function Cart() {
                                     />
                                 </div>
 
-                                {/* Address */}
+                                
                                 <div>
                                     <label className="block text-sm font-medium text-zinc-700 mb-1">
                                         Адреса доставки <span className="text-red-500">*</span>
@@ -292,7 +285,7 @@ export default function Cart() {
                                     />
                                 </div>
 
-                                {/* Email */}
+                                
                                 <div>
                                     <label className="block text-sm font-medium text-zinc-700 mb-1">
                                         Електронна пошта
@@ -307,7 +300,7 @@ export default function Cart() {
                                     />
                                 </div>
 
-                                {/* Notes */}
+                                
                                 <div>
                                     <label className="block text-sm font-medium text-zinc-700 mb-1">
                                         Примітки до замовлення
@@ -322,7 +315,7 @@ export default function Cart() {
                                     />
                                 </div>
 
-                                {/* Submit Button */}
+                                
                                 <button
                                     type="submit"
                                     disabled={loading || cartItems.length === 0}
