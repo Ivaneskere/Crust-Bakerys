@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeItem, updateQuantity, clearCart, setCart } from '../../../store/cartSlice'
 import { showToast } from '../../../components/showToast'
+import { Page } from '../../../components/Page'
 
 export default function Cart() {
     const dispatch = useDispatch()
@@ -137,6 +138,7 @@ export default function Cart() {
     }
 
     return (
+        <Page>
         <main className="bg-[#f7f1e6] min-h-screen py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
                 <div className="mb-8">
@@ -333,5 +335,6 @@ export default function Cart() {
                 </div>
             </div>
         </main>
+        </Page>
     )
 }
