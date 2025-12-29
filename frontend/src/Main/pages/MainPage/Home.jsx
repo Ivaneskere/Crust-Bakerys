@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, setCategory } from "../../../store/productsSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 
@@ -21,16 +22,12 @@ function Home() {
       dispatch(fetchProducts())
    }, [dispatch])
 
-
-
-
-
    const filteredItems = selectedCategory === "All" ? items.slice(0, 6) : items.filter((item) => item.category === selectedCategory).slice(0, 6)
    return (
       <Page>
          <div>
 
-            <section className="relative w-screen min-h-screen overflow-hidden">
+            <section className="relative w-full min-h-screen overflow-hidden">
 
                {/* КАРТИНКА */}
 
