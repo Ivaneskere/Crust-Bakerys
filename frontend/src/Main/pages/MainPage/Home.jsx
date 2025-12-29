@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, setCategory } from "../../../store/productsSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion'
+import { motion} from 'framer-motion'
+
 
 
 import { Page } from "../../../components/Page";
@@ -37,19 +37,30 @@ function Home() {
                   <div className="max-w-7xl mx-auto px-8 pt-32">
                      <div className="max-w-xl text-white">
                         <p className="text-yellow-400 uppercase tracking-wide mb-3">
-                           Delicious Cafe
+                           Смачне кафе
                         </p>
 
                         <h1 className="text-5xl font-bold leading-tight mb-6">
-                           Sweet Treats,<br />Perfect Eats
+                           Свіжа випічка,<br />Солодкі миті щодня.
                         </h1>
 
                         <div className="flex gap-4">
                            <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              onClick={() => navigate("/products")}
-                              className="px-6 py-3 bg-orange-600 text-white rounded-xl shadow-lg"
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5 }}
+                              onClick={() => navigate("/Products")}
+                              className="
+                                       px-6 py-3
+                                       bg-[#7b4a2a]
+                                       text-white
+                                       rounded-xl
+                                       shadow-md
+                                       hover:bg-[#6a3a1a]
+                                       transition-colors
+  "
                            >
                               Перейти до меню
                            </motion.button>
@@ -59,10 +70,19 @@ function Home() {
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.5, delay: 0.1 }}
-                              onClick={() => navigate("/products")}
-                              className="px-6 py-3 border border-white text-white rounded hover:bg-white hover:text-black"
+                              onClick={() => navigate("/AboutUs")}
+                              className="
+                                    px-6 py-3
+                                    border border-zinc-800
+                                    text-zinc-800
+                                    rounded-xl
+                                    bg-black/5
+                                    hover:bg-zinc-900
+                                    hover:text-white
+                                    transition
+  "
                            >
-                              Learn More
+                              Дізнатися більше про нас
                            </motion.button>
                         </div>
                      </div>
@@ -113,16 +133,17 @@ function Home() {
                         className="group rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden shadow-sm
                 transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
                      >
-                        <img
-                           src={item.image}
-                           alt={item.name}
-                           loading="lazy"
-                           className="h-40 w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                           onError={(e) => {
-                              e.currentTarget.onerror = null
-                              e.currentTarget.src = "/IMG/Logo/logoImg.png"
-                           }}
-                        />
+                        <section className="relative h-[300px] overflow-hidden">
+                           <img
+                              src={item.image}
+                              alt={item.name}
+                              className="absolute inset-0 h-full w-full object-cover"
+                              onError={(e) => {
+                                 e.currentTarget.onerror = null
+                                 e.currentTarget.src = "/IMG/DifAll/akz_1.jpg"
+                              }}
+                           />
+                        </section>
                         <div className="p-4">
                            <h3 className="text-sm font-semibold">{item.name}</h3>
                            <p className="mt-1 text-xs text-zinc-500">{item.category}</p>
@@ -150,46 +171,7 @@ function Home() {
 
 
 
-         <footer className="bg-[#1c1c1c] text-zinc-300 mt-24">
-            <div className="max-w-6xl mx-auto px-6 py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
-               <div>
-                  <h4 className="text-white font-semibold mb-3">Crust Bakery</h4>
-                  <p className="text-sm text-zinc-400">
-                     Fresh bakery & desserts made with love every day.
-                  </p>
-               </div>
-
-               <div>
-                  <h4 className="text-white font-semibold mb-3">Menu</h4>
-                  <ul className="space-y-2 text-sm">
-                     <li>Pizza</li>
-                     <li>Bakery</li>
-                     <li>Cakes</li>
-                     <li>Sushi</li>
-                  </ul>
-               </div>
-
-               <div>
-                  <h4 className="text-white font-semibold mb-3">Company</h4>
-                  <ul className="space-y-2 text-sm">
-                     <li>About</li>
-                     <li>Contacts</li>
-                     <li>Delivery</li>
-                  </ul>
-               </div>
-
-               <div>
-                  <h4 className="text-white font-semibold mb-3">Contacts</h4>
-                  <p className="text-sm">Kyiv, Ukraine</p>
-                  <p className="text-sm">+380 00 000 00 00</p>
-               </div>
-            </div>
-
-            <div className="border-t border-white/10 text-center py-4 text-xs text-zinc-500">
-               © 2025 Crust Bakery. All rights reserved.
-            </div>
-         </footer>
       </Page>
    )
 } export default Home;
