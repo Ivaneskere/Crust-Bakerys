@@ -12,13 +12,8 @@ function Header() {
   };
 
   useEffect(() => {
-    // Отримати кількість товарів з localStorage на початку
     updateCartCount();
-
-    // Слухати custom event при зміні кошика в тому ж табу
     window.addEventListener('cartUpdated', updateCartCount);
-    
-    // Слухати storage event для інших табів
     window.addEventListener('storage', updateCartCount);
 
     return () => {
@@ -87,13 +82,13 @@ function Header() {
               )}
             </Link>
 
-            <Link
+            {/* <Link
               to="/Account"
               className="inline-flex items-center gap-2 rounded-2xl bg-[#2f241a] px-4 py-2 text-sm font-semibold text-[#f7f1e6] shadow-sm ring-1 ring-black/10 transition hover:bg-[#241b13] focus:outline-none focus:ring-2 focus:ring-[#caa27a]/50"
             >
               <span className="text-base leading-none">👤</span>
               <span className="hidden sm:inline">Акаунт</span>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
