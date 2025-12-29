@@ -1,97 +1,87 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import cors from 'cors'
-import Product from './models/Product.js'
+import express from "express";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
 
-dotenv.config()
+const app = express();
 
-const app = express()
-app.use(express.json())
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 
-const orderSchema = new mongoose.Schema({
-    customerName: String,
-    phone: String,
-    address: String,
-    email: String,
-    items: [{
-        id: String,
-        name: String,
-        quantity: Number,
-        price: Number,
-        subtotal: Number
-    }],
-    totalPrice: Number,
-    totalQuantity: Number,
-    notes: String,
-    createdAt: { type: Date, default: Date.now },
-    status: { type: String, default: 'pending' }
-})
+// путь к папке с JSON
+const dataDir = path.resolve("../frontend/DB");
 
-const Order = mongoose.model('Order', orderSchema)
+// helper для чтения JSON
+function readJSON(fileName) {
+  const filePath = path.join(dataDir, fileName);
+  const data = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(data);
+}
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("MongoDB ok");
-        app.listen(3000, () => console.log('http://localhost:3000'));
-    })
-    .catch(e => {
-        console.error("Mongo error:", e.message);
-        process.exit(1);
-    });
+// PRODUCTS
+app.get("/products", (req, res) => {
+  try {
+    const baking = readJSON("Baking.json");
+    const pizza = readJSON("Pizza.json");
+    const sushi = readJSON("SushiSet.json");
+    const hachapuri = readJSON("Hachapuri.json");
+    const tortu = readJSON("tortu.json");
+    const news = readJSON("new.json");
 
-app.get('/products', async (req, res) => {
-    try {
-        const products = await Product.find()
-        res.json(products)
-    } catch (e) {
-        res.status(500).json({error: e.message})
-    }
-    
-})
+    const allProducts = [
+      ...baking,
+      ...pizza,
+      ...sushi,
+      ...hachapuri,
+      ...tortu,
+      ...news,
+    ];
 
-app.post('/orders', async (req, res) => {
-    try {
-        const { customerName, phone, address, email, items, totalPrice, totalQuantity, notes } = req.body
-        
-        if (!customerName || !phone || !address || !items || items.length === 0) {
-            return res.status(400).json({ error: 'Missing required fields' })
-        }
-        
-        const order = new Order({
-            customerName,
-            phone,
-            address,
-            email,
-            items,
-            totalPrice,
-            totalQuantity,
-            notes
-        })
-        
-        await order.save()
-        res.status(201).json({ message: 'Order created', orderId: order._id, order })
-    } catch (e) {
-        res.status(500).json({ error: e.message })
-    }
-})
+    res.json(allProducts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
-app.get('/orders', async (req, res) => {
-    try {
-        const orders = await Order.find().sort({ createdAt: -1 })
-        res.json(orders)
-    } catch (e) {
-        res.status(500).json({ error: e.message })
-    }
-})
+// ORDERS (временно в памяти)
+let orders = [];
 
-app.get('/orders/:id', async (req, res) => {
-    try {
-        const order = await Order.findById(req.params.id)
-        if (!order) return res.status(404).json({ error: 'Order not found' })
-        res.json(order)
-    } catch (e) {
-        res.status(500).json({ error: e.message })
-    }
-})
+app.post("/orders", (req, res) => {
+  const { customerName, phone, address, email, items, totalPrice, totalQuantity, notes } = req.body;
+
+  if (!customerName || !phone || !address || !items || items.length === 0) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const order = {
+    id: Date.now().toString(),
+    customerName,
+    phone,
+    address,
+    email,
+    items,
+    totalPrice,
+    totalQuantity,
+    notes,
+    createdAt: new Date(),
+    status: "pending",
+  };
+
+  orders.unshift(order);
+  res.status(201).json({ message: "Order created", order });
+});
+
+app.get("/orders", (req, res) => {
+  res.json(orders);
+});
+
+app.get("/orders/:id", (req, res) => {
+  const order = orders.find(o => o.id === req.params.id);
+  if (!order) return res.status(404).json({ error: "Order not found" });
+  res.json(order);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 API running at http://localhost:${PORT}`);
+});

@@ -24,7 +24,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_HoneyCake.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, яйця, маргарин, мед, сода, сметана, вершки ,крем-пломбір ",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "503",
@@ -33,7 +34,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Cherry.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, яйця, вершки, вишневий джем, шоколад.  ",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "505",
@@ -42,7 +44,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Kazka.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, яйця, какао, вершки, варене згущене молоко, вишневий джем, шоколад.",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "506",
@@ -51,7 +54,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Smetannik.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, яйця, сметана, какао, вершки",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "507",
@@ -60,7 +64,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Pincher.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, яйця, сметана, какао, вершки, курага чорнослив, горіхи курага",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "508",
@@ -69,7 +74,8 @@
     "price": "320",
     "image": "/IMG/Tortu/TortRaspberryFantasy.png",
     "description": "Склад:Борошно пшеничне в/г,цукор яйця какао, малина желе, молоко, масло,крохмаль",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "511",
@@ -78,7 +84,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Broken_glass.png",
     "description": "Склад: Борошно пшеничне в/г, цукор, яйця, вершки, сметана, вершки, желе",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "512",
@@ -87,7 +94,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Truffle.png",
     "description": "Склад: Борошно пшеничне в/с, цукор, какао,яйця, масло, варене згущене молоко, шоколад.",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "513",
@@ -96,7 +104,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Baunti.png",
     "description": "Склад:  Борошно пшеничне в/г,цукор яйця, какао, кокос, молоко, масло,крохмаль",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "514",
@@ -105,7 +114,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Raspberry_roll.png",
     "description": "Склад: Борошно пшеничне в/г,цукор, яйця, вершки, сиркова маса малиновий джем",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "516",
@@ -114,7 +124,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Spartak.png",
     "description": "Склад:Борошно пшеничне в/г,цукор яйця, какао, молоко, масло,крохмаль",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "518",
@@ -123,7 +134,8 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Bird_milk.png",
     "description": "Склад: Борошно пшеничне в/г,цукор яйця, молоко, масло,желатин",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   },
   {
     "id": "520",
@@ -132,6 +144,7 @@
     "price": "320",
     "image": "/IMG/Tortu/Tort_Pistachio_raspberry.png",
     "description": "Склад: борошно пшеничне в/с, цукор, яйця, вершки, фісташкова паста, малиновий джем, арахіс, шоколад.",
-    "nutrition": ".../.../... на 100г"
+    "nutrition": ".../.../... на 100г",
+    "category": "Cake"
   }
 ]

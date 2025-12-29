@@ -22,9 +22,9 @@ export default function AboutUs() {
     ];
 
     const timeline = [
-        { year: "2019", title: "Перший день роботи", img: "/IMG/Pizza(img)/Pizza_11.png" },
-        { year: "2021", title: "Перший аншлаг", img: "/IMG/Pizza(img)/Pizza_11.png" },
-        { year: "2024", title: "Найбільше замовлення", img: "/IMG/Pizza(img)/Pizza_11.png" },
+        { year: "2019", title: "Перший день роботи", img: "./IMG/Pizza/Pizza_11.png" },
+        { year: "2021", title: "Перший аншлаг", img: "./IMG/Pizza/Pizza_11.png" },
+        { year: "2024", title: "Найбільше замовлення", img: "./IMG/Pizza//Pizza_11.png" },
     ];
 
     const team = [
