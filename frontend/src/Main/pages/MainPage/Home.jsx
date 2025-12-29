@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { motion} from 'framer-motion'
 
 
+
 import { Page } from "../../../components/Page";
 
 
@@ -20,10 +21,6 @@ function Home() {
    useEffect(() => {
       dispatch(fetchProducts())
    }, [dispatch])
-
-
-
-
 
    const filteredItems = selectedCategory === "All" ? items.slice(0, 6) : items.filter((item) => item.category === selectedCategory).slice(0, 6)
    return (
